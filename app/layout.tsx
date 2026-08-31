@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Exo } from "next/font/google";
 import "./globals.css";
+import Navbar from "./-commponent/Navbar/Navbar";
+import Footer from "./-commponent/Footer/Footer";
+import TopNav from "./-commponent/TopNav/TopNav";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const exo = Exo({
+  variable: "--font-exo",
+  weight: ["100", "400", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,9 +21,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${exo.className} ${exo.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="">
+        <TopNav/>
+         <Navbar/>
+
+        {children}
+
+         <Footer/>
+        </body>
     </html>
   );
 }
