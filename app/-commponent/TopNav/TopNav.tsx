@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function TopNav() {
   return (
-    <div className=' hidden bg-gray-100 border-b border-gray-300  p-3 lg:flex justify-between  '>
+    <div className=' hidden bg-white border-b border-gray-300  p-3 lg:flex justify-between  '>
       <div className="leftSide flex items-center gap-7 ">
         
           <span className=' flex gap-2 '>

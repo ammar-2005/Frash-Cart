@@ -4,9 +4,13 @@ import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import {
-  CircleAlertIcon,
-  CircleCheckIcon,
-  CircleDashedIcon,
+  SearchIcon,
+  HeartIcon,
+  ShoppingCartIcon,
+  HeadsetIcon,
+  MenuIcon,
+  UserIcon,
+  XIcon,
 } from "lucide-react"
 
 import {
@@ -16,149 +20,279 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 
 import logo from '../../images/freshcart-logo.svg'
 
-const components: { title: string; href: string; description: string }[] = [
+const categories: { title: string; href: string; description: string }[] = [
   {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-    description:
-      "For sighted users to preview content available behind a link.",
+    title: "Fruits & Vegetables",
+    href: "/categories/fruits-vegetables",
+    description: "Fresh produce sourced daily from local farms.",
   },
   {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+    title: "Dairy & Eggs",
+    href: "/categories/dairy-eggs",
+    description: "Milk, cheese, yogurt and everything in between.",
   },
   {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
+    title: "Bakery",
+    href: "/categories/bakery",
+    description: "Freshly baked bread, pastries and desserts.",
   },
   {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+    title: "Beverages",
+    href: "/categories/beverages",
+    description: "Juices, sodas, water and hot drinks.",
   },
   {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+    title: "Snacks",
+    href: "/categories/snacks",
+    description: "Chips, sweets and everything for a quick bite.",
+  },
+  {
+    title: "Household",
+    href: "/categories/household",
+    description: "Cleaning supplies and everyday essentials.",
   },
 ]
 
+const navLinks = [
+  { title: "Home", href: "/" },
+  { title: "Shop", href: "/shop" },
+  { title: "Categories", href: "/categories" },
+  { title: "Brands", href: "/brands" },
+]
+
 export default function Navbar() {
+  const [mobileOpen, setMobileOpen] = React.useState(false)
+  const [accountOpen, setAccountOpen] = React.useState(false)
+
   return (
-     
-    <NavigationMenu className='max-w-full p-4  bg-gray-100 sticky top-0 '>
-      <NavigationMenuList className='justify-between '>
+    <NavigationMenu className="max-w-full w-full bg-white border-b border-gray-300 sticky top-0 z-50">
+      <NavigationMenuList className="w-full flex items-center gap-4 px-4 py-3">
         {/* logo */}
+        <Link href="/" className="flex items-center shrink-0">
+          <Image
+            src={logo}
+            alt="FreshCart"
+            width={130}
+            height={40}
+            className="h-8 w-auto lg:h-10"
+          />
+        </Link>
 
-        <Image src={logo} alt='fresh' width={120} height={40} className='h-10 w-auto' />
- 
-          {/* nav links */}
-       <div className="md:flex gap-5  hidden">
-  <NavigationMenuItem>
-           <Link href='/' className="hover:text-green-500">
-             Home
-            </Link>
-        </NavigationMenuItem>
-  <NavigationMenuItem>
-           <Link href='/shop' className="hover:text-green-500">
-             Shop
-            </Link>
-        </NavigationMenuItem>
-  <NavigationMenuItem>
-           <Link href='/brands' className="hover:text-green-500">
-             Brands
-            </Link>
-        </NavigationMenuItem>
-  <NavigationMenuItem>
-           <Link href='/categories' className="hover:text-green-500">
-             Categories
-            </Link>
-        </NavigationMenuItem>
-         
-       </div>
-      {/* nav icons */}
-       <div className="md:flex gap-7 items-center  hidden">
-       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-</svg>
+        {/* search - desktop only */}
+        <div className="hidden lg:flex flex-1 max-w-xl">
+          <div className="flex w-full items-center rounded-full bg-white border border-gray-300 overflow-hidden">
+            <input
+              type="text"
+              placeholder="Search for products, brands and more..."
+              className="flex-1 px-4 py-2 text-sm outline-none bg-transparent"
+            />
+            <button
+              type="button"
+              aria-label="Search"
+              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2.5 flex items-center justify-center transition-colors"
+            >
+              <SearchIcon className="size-5" />
+            </button>
+          </div>
+        </div>
 
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-</svg>
-
-
-  <button className="bg-green-600 text-white px-3 py-2 rounded-md ">
-    SingIn 
-  </button>
-
-       </div>
-
-      
-     {/* links mobile */}
-        <NavigationMenuItem className='md:hidden '>
-
-
-
-          <NavigationMenuTrigger>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
-</svg>
-
-
-
-          </NavigationMenuTrigger>
-
-          <NavigationMenuContent>
-            <ul className="w-96 flex flex-col items-center">
-              <ListItem href="/" >
-              <Link href='/'>
-              Home
-              </Link>
-                  
-              </ListItem>
-              <ListItem href="/shop" >
-              <Link href='/shop'>
-              Shop
-              </Link>
-                  
-              </ListItem>
-              <ListItem href="/brands" >
-              <Link href='/brands'>
-                Brands
-              </Link>
-                  
-              </ListItem>
-              <ListItem href="/categories" >
-              <Link href='/categories'>
+        {/* nav links - desktop only */}
+        <div className="hidden lg:flex items-center gap-6 shrink-0">
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              render={
+                <Link href="/" className="text-sm font-medium hover:text-green-600">
+                  Home
+                </Link>
+              }
+            />
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              render={
+                <Link href="/shop" className="text-sm font-medium hover:text-green-600">
+                  Shop
+                </Link>
+              }
+            />
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger className="text-sm font-medium">
               Categories
-              </Link>
-                  
-              </ListItem>
-            
-            </ul>
-          </NavigationMenuContent>
+            </NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2">
+                {categories.map((category) => (
+                  <ListItem key={category.title} title={category.title} href={category.href}>
+                    {category.description}
+                  </ListItem>
+                ))}
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              render={
+                <Link href="/brands" className="text-sm font-medium hover:text-green-600">
+                  Brands
+                </Link>
+              }
+            />
+          </NavigationMenuItem>
+        </div>
 
-        </NavigationMenuItem>
+        {/* right icons - desktop only */}
+        <div className="hidden lg:flex items-center gap-5 shrink-0 ml-auto">
+          <Link href="/support" className="flex items-center gap-2 text-gray-600 hover:text-green-600">
+            <HeadsetIcon className="size-6" />
+            <span className="flex flex-col leading-tight text-xs">
+              <span className="text-gray-500">Support</span>
+              <span className="font-semibold text-gray-800">24/7 Help</span>
+            </span>
+          </Link>
 
+          <Link href="/wishlist" className="text-gray-700 hover:text-green-600">
+            <HeartIcon className="size-6" />
+          </Link>
 
+          <Link href="/cart" className="text-gray-700 hover:text-green-600">
+            <ShoppingCartIcon className="size-6" />
+          </Link>
+
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setAccountOpen((prev) => !prev)}
+              aria-label="Account"
+              className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full flex items-center justify-center transition-colors"
+            >
+              <UserIcon className="size-5" />
+            </button>
+
+            {accountOpen && (
+              <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg py-2 flex flex-col">
+                <Link
+                  href="/login"
+                  className="px-4 py-2 text-sm hover:bg-gray-100 hover:text-green-600"
+                  onClick={() => setAccountOpen(false)}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/register"
+                  className="px-4 py-2 text-sm hover:bg-gray-100 hover:text-green-600"
+                  onClick={() => setAccountOpen(false)}
+                >
+                  Sign Up
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* right icons - mobile only */}
+        <div className="flex lg:hidden items-center gap-4 ml-auto">
+          <Link href="/wishlist" className="text-gray-700 hover:text-green-600">
+            <HeartIcon className="size-6" />
+          </Link>
+
+          <Link href="/cart" className="text-gray-700 hover:text-green-600">
+            <ShoppingCartIcon className="size-6" />
+          </Link>
+
+          <button
+            type="button"
+            onClick={() => setMobileOpen((prev) => !prev)}
+            aria-label="Menu"
+            className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full flex items-center justify-center transition-colors"
+          >
+            {mobileOpen ? <XIcon className="size-5" /> : <MenuIcon className="size-5" />}
+          </button>
+        </div>
       </NavigationMenuList>
+
+      {/* mobile menu panel */}
+      {mobileOpen && (
+        <div className="lg:hidden border-t border-gray-300 bg-gray-100 px-4 py-4 flex flex-col gap-4">
+          {/* search */}
+          <div className="flex items-center rounded-full bg-white border border-gray-300 overflow-hidden">
+            <input
+              type="text"
+              placeholder="Search for products, brands and more..."
+              className="flex-1 px-4 py-2 text-sm outline-none bg-transparent"
+            />
+            <button
+              type="button"
+              aria-label="Search"
+              className="bg-green-600 text-white px-4 py-2.5 flex items-center justify-center"
+            >
+              <SearchIcon className="size-5" />
+            </button>
+          </div>
+
+          {/* nav links */}
+          <div className="flex flex-col gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="py-2 px-2 rounded-md text-sm font-medium hover:bg-gray-200 hover:text-green-600"
+              >
+                {link.title}
+              </Link>
+            ))}
+
+            <span className="py-2 px-2 text-sm font-medium text-gray-500">Categories</span>
+            <div className="flex flex-col pl-4">
+              {categories.map((category) => (
+                <Link
+                  key={category.href}
+                  href={category.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="py-1.5 px-2 rounded-md text-sm hover:bg-gray-200 hover:text-green-600"
+                >
+                  {category.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="h-px bg-gray-300" />
+
+          {/* support */}
+          <Link
+            href="/support"
+            onClick={() => setMobileOpen(false)}
+            className="flex items-center gap-2 text-sm text-gray-600 hover:text-green-600"
+          >
+            <HeadsetIcon className="size-5" />
+            Support - 24/7 Help
+          </Link>
+
+          {/* auth */}
+          <div className="flex gap-3">
+            <Link
+              href="/login"
+              onClick={() => setMobileOpen(false)}
+              className="flex-1 text-center border border-green-600 text-green-600 rounded-md py-2 text-sm font-medium hover:bg-green-50"
+            >
+              Sign In
+            </Link>
+            <Link
+              href="/register"
+              onClick={() => setMobileOpen(false)}
+              className="flex-1 text-center bg-green-600 text-white rounded-md py-2 text-sm font-medium hover:bg-green-700"
+            >
+              Sign Up
+            </Link>
+          </div>
+        </div>
+      )}
     </NavigationMenu>
   )
 }
@@ -171,10 +305,16 @@ function ListItem({
 }: React.ComponentPropsWithoutRef<"li"> & { href: string }) {
   return (
     <li {...props}>
-      <NavigationMenuLink render={<Link href={href}><div className="flex flex-col gap-1 text-sm">
-          <div className="leading-none font-medium">{title}</div>
-          <div className="line-clamp-2 text-muted-foreground">{children}</div>
-        </div></Link>} />
+      <NavigationMenuLink
+        render={
+          <Link href={href}>
+            <div className="flex flex-col gap-1 text-sm">
+              <div className="leading-none font-medium">{title}</div>
+              <div className="line-clamp-2 text-muted-foreground">{children}</div>
+            </div>
+          </Link>
+        }
+      />
     </li>
   )
 }
