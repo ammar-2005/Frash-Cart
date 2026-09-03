@@ -1,14 +1,11 @@
-import Image from "next/image";
 import FeaturedProduct from "./-commponent/FeaturedProduct/FeaturedProduct";
+import ShopCategory from "./-commponent/ShopCategory/ShopCategory";
 
 export default function Home() {
   return (
-  <>
-    <h1>
-      Home page
-
+    <main className="mx-auto max-w-8xl px-4">
+      <ShopCategory/>
       <FeaturedProduct/>
-    </h1>
-  </>
+    </main>
   );
 }

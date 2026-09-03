@@ -1,6 +1,5 @@
 import type { NextConfig } from "next";
-// https://ecommerce.routemisr.com/api/v1/products
-
+// https://ecommerce.routemisr.com/Route-Academy-products/1680403397402-cover.jpeg
 const nextConfig: NextConfig = {
   /* config options here */
     images: {
@@ -8,11 +7,12 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'ecommerce.routemisr.com',
-        pathname: '/Route-Academy-products/**',
-       
+      
+        pathname: '/*/**',
+        
       },
+      
     ],
   },
 };
-
 export default nextConfig;
