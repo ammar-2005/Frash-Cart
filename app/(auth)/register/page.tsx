@@ -1,21 +1,17 @@
 'use client'
 import React from 'react'
-import { StarIcon, TruckIcon, ShieldCheckIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import Link from 'next/link'
+import { StarIcon, TruckIcon, ShieldCheckIcon, UserCircleIcon, UserPlusIcon } from '@heroicons/react/24/solid'
 import {
   Field,
-  FieldContent,
   FieldDescription,
   FieldError,
-  FieldGroup,
   FieldLabel,
-  FieldLegend,
-  FieldSeparator,
-  FieldSet,
-  FieldTitle,
 } from "@/components/ui/field"
 import { useForm, Controller } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
-
+import { Schema, type RegisterFormValues } from '../../Schema/registerSchema'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 const features = [
   {
@@ -35,251 +31,264 @@ const features = [
   },
 ]
 
-export default function Register() {
-  const {register , control , handleSubmit}= useForm({
-    defaultValues:{
-      name:'',
-      email:'',
-      password:'',
-      rePassword:'',
-      phone:'',
-    }
 
+export default function Register() {
+  const { control, handleSubmit, watch } = useForm<RegisterFormValues>({
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+      rePassword: '',
+      phone: '',
+    },
+    resolver: zodResolver(Schema),
   })
 
-  function submitForm (data){
+
+  function submitForm(data: RegisterFormValues) {
     console.log(data)
-      
   }
 
-  
-
   return (
-    <>
-     <div className=" max-w-7xl mx-auto w-full my-5 ">
-      {/* left site */}
-    <div className="  max-w-md w-1/3">
-      {/* heading */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-black">
-          Welcome to <span className="text-emerald-600">FreshCart</span>
-        </h1>
-        <p className="mt-2 text-gray-600">
-          Join thousands of happy customers who enjoy fresh groceries delivered right to their
-          doorstep.
-        </p>
-      </div>
+    <div className="mx-auto my-5 flex w-full max-w-6xl flex-col gap-10 lg:flex-row">
+      {/* left side */}
+      <div className="w-full lg:w-1/3">
+        {/* heading */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-black">
+            Welcome to <span className="text-emerald-600">FreshCart</span>
+          </h1>
+          <p className="mt-2 text-gray-600">
+            Join thousands of happy customers who enjoy fresh groceries delivered right to their
+            doorstep.
+          </p>
+        </div>
 
-      {/* 3 items */}
-      <div className="flex flex-col gap-6">
-        {features.map((feature) => (
-          <div key={feature.title} className="flex items-start gap-4">
-            <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-emerald-100">
-              <feature.icon className="size-5 text-emerald-600" />
+        {/* 3 items */}
+        <div className="flex flex-col gap-6">
+          {features.map((feature) => (
+            <div key={feature.title} className="flex items-start gap-4">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-emerald-100">
+                <feature.icon className="size-5 text-emerald-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-black">{feature.title}</h3>
+                <p className="text-sm text-gray-500">{feature.description}</p>
+              </div>
             </div>
+          ))}
+        </div>
+
+        {/* testimonial card */}
+        <div className="mt-8 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="flex items-center gap-3">
+            <UserCircleIcon className="size-10 text-emerald-500" />
             <div>
-              <h3 className="font-semibold text-black">{feature.title}</h3>
-              <p className="text-sm text-gray-500">{feature.description}</p>
+              <h3 className="text-sm font-semibold text-black">Sarah Johnson</h3>
+              <div className="flex items-center gap-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <StarIcon key={i} className="size-4 text-amber-400" />
+                ))}
+              </div>
             </div>
           </div>
-        ))}
+
+          <p className="mt-3 text-sm italic text-gray-600">
+            &quot;FreshCart has transformed my shopping experience. The quality of the products is
+            outstanding, and the delivery is always on time. Highly recommend!&quot;
+          </p>
+        </div>
       </div>
 
-      {/* testimonial card */}
-      <div className="mt-8 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-        <div className="flex items-center gap-3">
-          <UserCircleIcon className="size-10 text-emerald-500" />
-          <div>
-            <h3 className="text-sm font-semibold text-black">Sarah Johnson</h3>
-            <div className="flex items-center gap-0.5">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <StarIcon key={i} className="size-4 text-amber-400" />
-              ))}
+      {/* right side */}
+      <div className="w-full lg:flex-1">
+        <div className="flex flex-col items-center">
+          <h1 className="text-2xl font-extrabold xl:text-3xl">Create Your Account</h1>
+          <p className="text-sm font-medium text-gray-500">
+            Start your fresh journey with us today
+          </p>
+
+          <div className="mt-8 w-full max-w-xs">
+            {/* social buttons */}
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <button
+                type="button"
+                className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              >
+                <svg className="h-5 w-5" viewBox="-0.5 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                  <g fill="none" fillRule="evenodd">
+                    <path d="M9.827 24c0-1.524.253-2.986.705-4.356L2.623 13.604A23.78 23.78 0 0 0 .214 24c0 3.737.867 7.26 2.406 10.388l7.905-6.05A14.11 14.11 0 0 1 9.827 24" fill="#FBBC05" />
+                    <path d="M23.714 10.133c3.31 0 6.302 1.174 8.652 3.094l6.836-6.827C35.036 2.773 29.695.533 23.714.533 14.427.533 6.445 5.844 2.623 13.604l7.909 6.04c1.822-5.532 7.017-9.51 13.182-9.51" fill="#EB4335" />
+                    <path d="M23.714 37.867c-6.164 0-11.36-3.979-13.182-9.51l-7.909 6.037C6.445 42.156 14.427 47.467 23.714 47.467c5.732 0 11.204-2.035 15.31-5.849l-7.507-5.804c-2.118 1.334-4.785 2.053-7.803 2.053" fill="#34A853" />
+                    <path d="M46.145 24c0-1.387-.213-2.88-.534-4.267H23.714v9.067h12.604c-.63 3.091-2.346 5.468-4.8 7.014l7.507 5.804C43.34 37.614 46.145 31.649 46.145 24" fill="#4285F4" />
+                  </g>
+                </svg>
+                Google
+              </button>
+              <button
+                type="button"
+                className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              >
+                <svg className="h-5 w-5" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    fill="#4460A0"
+                    d="M25.638 48h-22.99A2.649 2.649 0 0 1 0 45.351V2.649A2.649 2.649 0 0 1 2.649 0h42.702A2.649 2.649 0 0 1 48 2.649v42.702A2.649 2.649 0 0 1 45.351 48H33.12V29.412h6.239l.934-7.244H33.12v-4.625c0-2.097.582-3.527 3.59-3.527h3.836V7.535a51.66 51.66 0 0 0-5.59-.286c-5.53 0-9.317 3.376-9.317 9.575v5.343h-6.256v7.244h6.256V48Z"
+                  />
+                </svg>
+                Facebook
+              </button>
             </div>
+
+            <div className="my-8 flex items-center gap-3 text-xs text-gray-400">
+              <span className="h-px flex-1 bg-gray-200" />
+              or
+              <span className="h-px flex-1 bg-gray-200" />
+            </div>
+
+            {/* form */}
+            <form onSubmit={handleSubmit(submitForm)} noValidate>
+              <div className="flex flex-col gap-6">
+                <Controller
+                  name="name"
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <Field data-invalid={fieldState.invalid}>
+                      <FieldLabel htmlFor={field.name}>Name*</FieldLabel>
+                      <Input
+                        {...field}
+                        id={field.name}
+                        aria-invalid={fieldState.invalid}
+                        placeholder="Ali"
+                        autoComplete="off"
+                      />
+                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                    </Field>
+                  )}
+                />
+
+                <Controller
+                  name="email"
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <Field data-invalid={fieldState.invalid}>
+                      <FieldLabel htmlFor={field.name}>Email*</FieldLabel>
+                      <Input
+                        {...field}
+                        id={field.name}
+                        aria-invalid={fieldState.invalid}
+                        placeholder="ali@example.com"
+                        autoComplete="off"
+                      />
+                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                    </Field>
+                  )}
+                />
+
+                <Controller
+                  name="password"
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <Field data-invalid={fieldState.invalid}>
+                      <FieldLabel htmlFor={field.name}>Password*</FieldLabel>
+                      <Input
+                        type="password"
+                        {...field}
+                        id={field.name}
+                        aria-invalid={fieldState.invalid}
+                        placeholder="Create a strong password"
+                        autoComplete="off"
+                      />
+                      
+                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                    </Field>
+                  )}
+                />
+
+                <Controller
+                  name="rePassword"
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <Field data-invalid={fieldState.invalid}>
+                      <FieldLabel htmlFor={field.name}>Confirm Password*</FieldLabel>
+                      <Input
+                        type="password"
+                        {...field}
+                        id={field.name}
+                        aria-invalid={fieldState.invalid}
+                        placeholder="Confirm your password"
+                        autoComplete="off"
+                      />
+                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                    </Field>
+                  )}
+                />
+
+                <Controller
+                  name="phone"
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <Field data-invalid={fieldState.invalid}>
+                      <FieldLabel htmlFor={field.name}>Phone Number*</FieldLabel>
+                      <Input
+                        {...field}
+                        id={field.name}
+                        aria-invalid={fieldState.invalid}
+                        placeholder="+1 234 567 8900"
+                        autoComplete="off"
+                      />
+                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                    </Field>
+                  )}
+                />
+
+                <Controller
+                  name="terms"
+                  control={control}
+                  render={({ field, fieldState }) => (
+                    <Field data-invalid={fieldState.invalid}>
+                      <label className="flex items-start gap-2 text-xs text-gray-600">
+                        <input
+                          type="checkbox"
+                          checked={field.value}
+                          onChange={(e) => field.onChange(e.target.checked)}
+                          className="mt-0.5 size-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                        />
+                        <span>
+                          I agree to the{' '}
+                          <Link href="/terms" className="text-emerald-600 hover:underline">
+                            Terms of Service
+                          </Link>{' '}
+                          and{' '}
+                          <Link href="/privacy-policy" className="text-emerald-600 hover:underline">
+                            Privacy Policy
+                          </Link>
+                          *
+                        </span>
+                      </label>
+                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                    </Field>
+                  )}
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 py-3 font-semibold tracking-wide text-white transition-all duration-300 ease-in-out hover:bg-emerald-700 focus:shadow-outline focus:outline-none"
+              >
+                <UserPlusIcon className="size-5" />
+                Create My Account
+              </button>
+            </form>
+
+            <p className="mt-6 text-center text-sm text-gray-600">
+              Already have an account?{' '}
+              <Link href="/login" className="font-medium text-emerald-600 hover:underline">
+                Sign In
+              </Link>
+            </p>
           </div>
         </div>
-
-        <p className="mt-3 text-sm italic text-gray-600">
-          &quot;FreshCart has transformed my shopping experience. The quality of the products is
-          outstanding, and the delivery is always on time. Highly recommend!&quot;
-        </p>
       </div>
     </div>
-    {/* right site */}
-    <div className="w-1/2">
-   <div className="mt-12 flex flex-col items-center">
-  <h1 className="text-2xl xl:text-3xl font-extrabold">
-   Create Your Account
-  </h1>
-  <p className=" text-sm font-medium">
-     Start your fresh journey with us today
-  </p>
-  <div className="w-full flex-1 mt-8">
-    <div className="flex items-center">
-     <div className="flex flex-col gap-4 sm:flex-row">
-  <button className="flex items-center bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-    <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="-0.5 0 48 48" version="1.1">
-      <g id="Icons" stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
-        <g id="Color-" transform="translate(-401.000000, -860.000000)">
-          <g id="Google" transform="translate(401.000000, 860.000000)">
-            <path d="M9.82727273,24 C9.82727273,22.4757333 10.0804318,21.0144 10.5322727,19.6437333 L2.62345455,13.6042667 C1.08206818,16.7338667 0.213636364,20.2602667 0.213636364,24 C0.213636364,27.7365333 1.081,31.2608 2.62025,34.3882667 L10.5247955,28.3370667 C10.0772273,26.9728 9.82727273,25.5168 9.82727273,24" id="Fill-1" fill="#FBBC05"> </path>
-            <path d="M23.7136364,10.1333333 C27.025,10.1333333 30.0159091,11.3066667 32.3659091,13.2266667 L39.2022727,6.4 C35.0363636,2.77333333 29.6954545,0.533333333 23.7136364,0.533333333 C14.4268636,0.533333333 6.44540909,5.84426667 2.62345455,13.6042667 L10.5322727,19.6437333 C12.3545909,14.112 17.5491591,10.1333333 23.7136364,10.1333333" id="Fill-2" fill="#EB4335"> </path>
-            <path d="M23.7136364,37.8666667 C17.5491591,37.8666667 12.3545909,33.888 10.5322727,28.3562667 L2.62345455,34.3946667 C6.44540909,42.1557333 14.4268636,47.4666667 23.7136364,47.4666667 C29.4455,47.4666667 34.9177955,45.4314667 39.0249545,41.6181333 L31.5177727,35.8144 C29.3995682,37.1488 26.7323182,37.8666667 23.7136364,37.8666667" id="Fill-3" fill="#34A853"> </path>
-            <path d="M46.1454545,24 C46.1454545,22.6133333 45.9318182,21.12 45.6113636,19.7333333 L23.7136364,19.7333333 L23.7136364,28.8 L36.3181818,28.8 C35.6879545,31.8912 33.9724545,34.2677333 31.5177727,35.8144 L39.0249545,41.6181333 C43.3393409,37.6138667 46.1454545,31.6490667 46.1454545,24" id="Fill-4" fill="#4285F4"> </path>
-          </g>
-        </g>
-      </g>
-    </svg>
-    <span>Continue with Google</span>
-  </button>
-  <button className="flex items-center bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-    <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48" version="1.1">
-      <g id="Icons" stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
-        <g id="Color-" transform="translate(-200.000000, -160.000000)" fill="#4460A0">
-          <path d="M225.638355,208 L202.649232,208 C201.185673,208 200,206.813592 200,205.350603 L200,162.649211 C200,161.18585 201.185859,160 202.649232,160 L245.350955,160 C246.813955,160 248,161.18585 248,162.649211 L248,205.350603 C248,206.813778 246.813769,208 245.350955,208 L233.119305,208 L233.119305,189.411755 L239.358521,189.411755 L240.292755,182.167586 L233.119305,182.167586 L233.119305,177.542641 C233.119305,175.445287 233.701712,174.01601 236.70929,174.01601 L240.545311,174.014333 L240.545311,167.535091 C239.881886,167.446808 237.604784,167.24957 234.955552,167.24957 C229.424834,167.24957 225.638355,170.625526 225.638355,176.825209 L225.638355,182.167586 L219.383122,182.167586 L219.383122,189.411755 L225.638355,189.411755 L225.638355,208 L225.638355,208 Z" id="Facebook">
-          </path>
-        </g>
-      </g>
-    </svg>
-    <span>Continue with Facebook</span>
-  </button>
-</div>
-
-    </div>
-    <div className="my-12 border-b text-center">
-      <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
-        Or 
-      </div>
-    </div>
-    <div className="mx-auto max-w-xs"> 
-      {/* form */}
-      <form  onSubmit={handleSubmit(submitForm)} className=''>
-        <div className=" flex flex-col gap-8">
-  <Controller
-  name="name"
-  control={control}
-  render={({ field, fieldState }) => (
-    <Field data-invalid={fieldState.invalid}>
-      <FieldLabel htmlFor={field.name}>Name*</FieldLabel>
-      <Input
-        {...field}
-        id={field.name}
-        aria-invalid={fieldState.invalid}
-        placeholder="All Name"
-        autoComplete="off"
-      />
-      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-    </Field>
-  )}
-/>
-  <Controller
-  name="email"
-  control={control}
-  render={({ field, fieldState }) => (
-    <Field data-invalid={fieldState.invalid}>
-      <FieldLabel htmlFor={field.name}>Email*</FieldLabel>
-      <Input
-      
-        {...field}
-        id={field.name}
-        aria-invalid={fieldState.invalid}
-        placeholder="ali@example.com"
-        autoComplete="off"
-      />
-      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-    </Field>
-  )}
-/>
-  <Controller
-  name="password"
-  control={control}
-  render={({ field, fieldState }) => (
-    <Field data-invalid={fieldState.invalid}>
-      <FieldLabel htmlFor={field.name}>PassWord*</FieldLabel>
-      <Input
-      type='password'
-        {...field}
-        id={field.name}
-        aria-invalid={fieldState.invalid}
-        placeholder="Create a Strong PassWord"
-        autoComplete="off"
-      />
-      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-    </Field>
-  )}
-/>
-  <Controller
-  name="rePassword"
-  control={control}
-  render={({ field, fieldState }) => (
-    <Field data-invalid={fieldState.invalid}>
-      <FieldLabel htmlFor={field.name}>Confirm PassWord*</FieldLabel>
-      <Input
-       type='password'
-        {...field}
-        id={field.name}
-        aria-invalid={fieldState.invalid}
-        placeholder="Confirm your PassWord"
-        autoComplete="off"
-      />
-      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-    </Field>
-  )}
-/>
-  <Controller
-  name="phone"
-  control={control}
-  render={({ field, fieldState }) => (
-    <Field data-invalid={fieldState.invalid}>
-      <FieldLabel htmlFor={field.name}>Phone Number*</FieldLabel>
-      <Input
-        {...field}
-        id={field.name}
-        aria-invalid={fieldState.invalid}
-        placeholder="+ 1234 567 8900"
-        autoComplete="off"
-      />
-      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-    </Field>
-  )}
-/>
-        </div>
-           
-      </form>
-     
-
-     
-      <button type="submit" className="mt-5 tracking-wide font-semibold bg-green-500 text-gray-100 w-full py-4 rounded-lg hover:bg-green-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-        <svg className="w-6 h-6 -ml-2" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-          <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-          <circle cx="8.5" cy={7} r={4} />
-          <path d="M20 8v6M23 11h-6" />
-        </svg>
-        <span className="ml-3">
-          Sign Up
-        </span>
-      </button>
-
-
-      <p className="mt-6 text-xs text-gray-600 text-center">
-        I agree to 
-        <a href="#" className="border-b text-green-500 border-gray-200 mx-1 ">
-          Terms of Service
-        </a>
-        and 
-        <a href="#" className="border-b text-green-500
-        border-gray-200  mx-1">
-          Privacy Policy
-        </a>
-      </p>
-    </div>
-  </div>
-</div>
-
-
-
-    </div>
-    </div>
-    </>
   )
 }
