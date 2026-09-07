@@ -1,4 +1,5 @@
 import { getShopCategory } from '@/app/Api/Service/Categories'
+import Link from "next/link"
 import Image from 'next/image'
 import React from 'react'
 
@@ -19,11 +20,9 @@ export default async function ShopCategory() {
 
       <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {data.map((category) => (
-          <a
-            className="flex min-h-30 flex-col items-center justify-center border border-slate-100 px-2 py-3 transition-shadow hover:shadow-md"
-            href={`/categories/${category.slug}`}
-            key={category._id}
-          >
+          <Link href={`/categories/${category.slug}`} className="flex min-h-30 flex-col items-center justify-center border border-slate-100 px-2 py-3 transition-shadow hover:shadow-md" 
+          key={category._id}>  
+       
             <Image
               src={category.image}
               alt={category.name}
@@ -32,7 +31,7 @@ export default async function ShopCategory() {
               className="h-20 w-20 rounded-full object-cover"
             />
             <h3 className="mt-3 text-center text-xl font-medium text-slate-700">{category.name}</h3>
-          </a>
+          </Link>
         ))}
       </div>
     </section>

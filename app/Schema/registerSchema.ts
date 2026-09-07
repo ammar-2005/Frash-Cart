@@ -22,7 +22,7 @@ export const Schema = zod
     phone: zod
       .string()
       .nonempty("Phone Required")
-      .regex(/^01[0125][0-9]{8}$/, "Invalid Phone Number"),
+      .regex(/^(?:\+20|20)?0?1[0125]\d{8}$/, "Invalid Phone Number"),
     terms: zod.boolean().refine((val) => val === true, {
       message: "You must accept the Terms of Service and Privacy Policy",
     }),

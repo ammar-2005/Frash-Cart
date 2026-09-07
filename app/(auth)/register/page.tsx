@@ -12,6 +12,9 @@ import { useForm, Controller } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import { Schema, type RegisterFormValues } from '../../Schema/registerSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from '@/components/ui/toast'
+import { useRouter } from 'next/navigation'
+import { submitForm as registerUser } from '@/app/Api/action/auth.actions'
 
 const features = [
   {
@@ -33,24 +36,39 @@ const features = [
 
 
 export default function Register() {
-  const { control, handleSubmit, watch } = useForm<RegisterFormValues>({
+  const router = useRouter()
+  const { control, handleSubmit } = useForm<RegisterFormValues>({
     defaultValues: {
       name: '',
       email: '',
       password: '',
       rePassword: '',
-      phone: '',
+      phone: '', 
+      terms: false,
     },
     resolver: zodResolver(Schema),
   })
+  async function submitForm(data: RegisterFormValues) {
+    const isRegistered = await registerUser(data)
+    console.log(isRegistered)
+    if(isRegistered){
+     toast.add({
+            type: "success",
+            description: "Event has been created.",
+          })
 
+          router.push('/login')
+    }
+    if(!isRegistered){
+     toast.add({
+            type: "error",
+            description: "Failed to create account.",
+          })
 
-  function submitForm(data: RegisterFormValues) {
-    console.log(data)
+    }
   }
-
   return (
-    <div className="mx-auto my-5 flex w-full max-w-6xl flex-col gap-10 lg:flex-row">
+    <div className="mx-auto my-10 flex w-full max-w-5xl flex-col items-center gap-8 px-4 lg:flex-row lg:items-stretch lg:gap-10">
       {/* left side */}
       <div className="w-full lg:w-1/3">
         {/* heading */}
