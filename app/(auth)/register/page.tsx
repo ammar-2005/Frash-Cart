@@ -14,7 +14,7 @@ import { Schema, type RegisterFormValues } from '../../Schema/registerSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from '@/components/ui/toast'
 import { useRouter } from 'next/navigation'
-import { submitForm as registerUser } from '@/app/Api/action/auth.actions'
+import { submitForm as registerUser } from '@/app/api/action/auth.actions'
 
 const features = [
   {
@@ -51,6 +51,7 @@ export default function Register() {
   async function submitForm(data: RegisterFormValues) {
     const isRegistered = await registerUser(data)
     console.log(isRegistered)
+    
     if(isRegistered){
      toast.add({
             type: "success",

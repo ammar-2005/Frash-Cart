@@ -24,9 +24,10 @@ import { Input } from '@/components/ui/input'
 import { Schema } from '../../Schema/loginSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from '@/components/ui/toast'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import { LoginFormValues } from '@/app/Schema/loginSchema'
-import { LoginSubmitForm } from '@/app/Api/action/auth.actions'
+import { signIn } from 'next-auth/react'
+import { callbackify } from 'util'
 
 const trustBadges = [
   { icon: SslIcon, label: 'SSL Secured' },
@@ -54,17 +55,17 @@ export default function Login() {
   })
 
   async function submitForm(data: LoginFormValues) {
-    const isRegistered = await LoginSubmitForm(data)
-    console.log(isRegistered)
-    if (isRegistered) {
+    const isLogin = await  signIn('credentials' , {...data} 
+    ) 
+    if (isLogin?.ok) { 
       toast.add({
         type: "success",
         description: "Event has been created.",
       })
 
-      router.push('/home')
+      router.push('/')
     }
-    if (!isRegistered) {
+    if (!isLogin) {
       toast.add({
         type: "error",
         description: "Failed to create account.",

@@ -1,6 +1,6 @@
-import { getAllProduct } from '@/app/Api/Service/ProductApi'
+import { getAllProduct } from '@/app/api/Service/ProductApi'
 import ProductCart from '../ProductCart/ProductCart'
-import { ProductType } from '@/app/Api/types/ProductType'
+import { ProductType } from '@/app/api/types/ProductType'
 
 export default async function FeaturedProduct() {
   const data: ProductType[] = await getAllProduct()

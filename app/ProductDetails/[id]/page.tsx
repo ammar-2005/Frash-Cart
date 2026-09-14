@@ -1,5 +1,5 @@
 import React from 'react'
-import { getSingleProduct } from '../../Api/Service/ProductApi'
+import { getSingleProduct } from '../../api/Service/ProductApi'
 import Image from 'next/image'
 import { PlusIcon, StarIcon } from '@heroicons/react/24/solid'
 import QuantitySelector from '@/app/-commponent/Quantityselector/Quantityselector'
