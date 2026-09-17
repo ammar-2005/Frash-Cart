@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/navigation-menu"
 
 import logo from '../../images/freshcart-logo.svg'
+import { useSession, signOut } from "next-auth/react"
 
 const categories: { title: string; href: string; description: string }[] = [
   {
@@ -60,7 +61,6 @@ const categories: { title: string; href: string; description: string }[] = [
 const navLinks = [
   { title: "Home", href: "/" },
   { title: "Shop", href: "/shop" },
-  { title: "Categories", href: "/categories" },
   { title: "Brands", href: "/brands" },
 ]
 
@@ -68,8 +68,11 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false)
   const [accountOpen, setAccountOpen] = React.useState(false)
 
+  const { status } = useSession()
+  const isAuthenticated = status === 'authenticated'
+
   return (
-    <NavigationMenu className="max-w-full w-full bg-white border-b border-gray-300 sticky top-0 z-50">
+    <NavigationMenu className="max-w-full w-full bg-gray-100 border-b border-gray-300 sticky top-0 z-50">
       <NavigationMenuList className="w-full flex items-center gap-4 px-4 py-3">
         {/* logo */}
         <Link href="/" className="flex items-center shrink-0">
@@ -121,25 +124,18 @@ export default function Navbar() {
             />
           </NavigationMenuItem>
           <NavigationMenuItem>
-              <NavigationMenuLink
-              render={
-                <Link href="/categories" className="text-sm font-medium hover:text-green-600">
-                  Categories
-                </Link>
-              }
-            />
-            {/* <NavigationMenuTrigger className="text-sm font-medium">
+            <NavigationMenuTrigger className="text-sm font-medium">
               Categories
-            </NavigationMenuTrigger> */}
-            {/* <NavigationMenuContent>
-              <ul className="grid w-100 gap-2 p-4 md:w-125 md:grid-cols-2">
+            </NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2">
                 {categories.map((category) => (
                   <ListItem key={category.title} title={category.title} href={category.href}>
                     {category.description}
                   </ListItem>
                 ))}
               </ul>
-            </NavigationMenuContent> */}
+            </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink
@@ -162,54 +158,78 @@ export default function Navbar() {
             </span>
           </Link>
 
-          <Link href="/wishlist" className="text-gray-700 hover:text-green-600">
-            <HeartIcon className="size-6" />
-          </Link>
+          {isAuthenticated ? (
+            <>
+              <Link href="/wishlist" className="text-gray-700 hover:text-green-600">
+                <HeartIcon className="size-6" />
+              </Link>
 
-          <Link href="/cart" className="text-gray-700 hover:text-green-600">
-            <ShoppingCartIcon className="size-6" />
-          </Link>
+              <Link href="/cart" className="text-gray-700 hover:text-green-600">
+                <ShoppingCartIcon className="size-6" />
+              </Link>
 
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setAccountOpen((prev) => !prev)}
-              aria-label="Account"
-              className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full flex items-center justify-center transition-colors"
-            >
-              <UserIcon className="size-5" />
-            </button>
+              <Link
+                href="/profile"
+                aria-label="My Account"
+                className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full flex items-center justify-center transition-colors"
+              >
+                <UserIcon className="size-5" />
+              </Link>
 
-            {accountOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg py-2 flex flex-col">
-                <Link
-                  href="/login"
-                  className="px-4 py-2 text-sm hover:bg-gray-100 hover:text-green-600"
-                  onClick={() => setAccountOpen(false)}
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/register"
-                  className="px-4 py-2 text-sm hover:bg-gray-100 hover:text-green-600"
-                  onClick={() => setAccountOpen(false)}
-                >
-                  Sign Up
-                </Link>
-              </div>
-            )}
-          </div>
+              <button
+                type="button"
+                onClick={() => signOut({ callbackUrl: '/' })}
+                className="rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800 transition-colors"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setAccountOpen((prev) => !prev)}
+                aria-label="Account"
+                className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full flex items-center justify-center transition-colors"
+              >
+                <UserIcon className="size-5" />
+              </button>
+
+              {accountOpen && (
+                <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg py-2 flex flex-col">
+                  <Link
+                    href="/login"
+                    className="px-4 py-2 text-sm hover:bg-gray-100 hover:text-green-600"
+                    onClick={() => setAccountOpen(false)}
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="px-4 py-2 text-sm hover:bg-gray-100 hover:text-green-600"
+                    onClick={() => setAccountOpen(false)}
+                  >
+                    Sign Up
+                  </Link>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* right icons - mobile only */}
         <div className="flex lg:hidden items-center gap-4 ml-auto">
-          <Link href="/wishlist" className="text-gray-700 hover:text-green-600">
-            <HeartIcon className="size-6" />
-          </Link>
+          {isAuthenticated && (
+            <>
+              <Link href="/wishlist" className="text-gray-700 hover:text-green-600">
+                <HeartIcon className="size-6" />
+              </Link>
 
-          <Link href="/cart" className="text-gray-700 hover:text-green-600">
-            <ShoppingCartIcon className="size-6" />
-          </Link>
+              <Link href="/cart" className="text-gray-700 hover:text-green-600">
+                <ShoppingCartIcon className="size-6" />
+              </Link>
+            </>
+          )}
 
           <button
             type="button"
@@ -282,22 +302,44 @@ export default function Navbar() {
           </Link>
 
           {/* auth */}
-          <div className="flex gap-3">
-            <Link
-              href="/login"
-              onClick={() => setMobileOpen(false)}
-              className="flex-1 text-center border border-green-600 text-green-600 rounded-md py-2 text-sm font-medium hover:bg-green-50"
-            >
-              Sign In
-            </Link>
-            <Link
-              href="/register"
-              onClick={() => setMobileOpen(false)}
-              className="flex-1 text-center bg-green-600 text-white rounded-md py-2 text-sm font-medium hover:bg-green-700"
-            >
-              Sign Up
-            </Link>
-          </div>
+          {isAuthenticated ? (
+            <div className="flex gap-3">
+              <Link
+                href="/profile"
+                onClick={() => setMobileOpen(false)}
+                className="flex-1 text-center border border-green-600 text-green-600 rounded-md py-2 text-sm font-medium hover:bg-green-50"
+              >
+                My Account
+              </Link>
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false)
+                  signOut({ callbackUrl: '/' })
+                }}
+                className="flex-1 rounded-md bg-slate-900 py-2 text-sm font-medium text-white hover:bg-slate-800"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="flex gap-3">
+              <Link
+                href="/login"
+                onClick={() => setMobileOpen(false)}
+                className="flex-1 text-center border border-green-600 text-green-600 rounded-md py-2 text-sm font-medium hover:bg-green-50"
+              >
+                Sign In
+              </Link>
+              <Link
+                href="/register"
+                onClick={() => setMobileOpen(false)}
+                className="flex-1 text-center bg-green-600 text-white rounded-md py-2 text-sm font-medium hover:bg-green-700"
+              >
+                Sign Up
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </NavigationMenu>

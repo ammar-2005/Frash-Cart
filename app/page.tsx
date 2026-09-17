@@ -13,7 +13,6 @@ export default function Home() {
       <ShopCategory/>
       <PromoBanners/>
       <FeaturedProduct/>
-      <Toaster />
       <Subscription/>
     </main>
   );

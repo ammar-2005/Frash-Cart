@@ -4,6 +4,9 @@ import "./globals.css";
 import Navbar from "./-commponent/Navbar/Navbar";
 import Footer from "./-commponent/Footer/Footer";
 import TopNav from "./-commponent/TopNav/TopNav";
+import { Toaster } from '@/components/ui/toast';
+import MyProvider from './-commponent/MyProvider/MyProvider';
+
 
 const exo = Exo({
   variable: "--font-exo",
@@ -24,12 +27,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${exo.className} ${exo.variable} h-full antialiased`}
     >
       <body className="">
-        <TopNav/>
+        <MyProvider>
+         <TopNav/>
          <Navbar/>
 
         {children}
-
+        <Toaster />
          <Footer/>
+        </MyProvider>
+      
         </body>
     </html>
   );
