@@ -20,7 +20,7 @@ export default async function ShopCategory() {
 
       <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {data.map((category) => (
-          <Link href={`/categories/${category.slug}`} className="flex min-h-30 flex-col items-center justify-center border border-slate-100 px-2 py-3 transition-shadow hover:shadow-md" 
+          <Link href={`/categories/${category._id}`} className="flex min-h-30 flex-col items-center justify-center border border-slate-100 px-2 py-3 transition-shadow hover:shadow-md" 
           key={category._id}>  
        
             <Image

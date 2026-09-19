@@ -6,6 +6,7 @@ import Footer from "./-commponent/Footer/Footer";
 import TopNav from "./-commponent/TopNav/TopNav";
 import { Toaster } from '@/components/ui/toast';
 import MyProvider from './-commponent/MyProvider/MyProvider';
+import Providers from "./-commponent/TanstackProvider/TanstackProvider";
 
 
 const exo = Exo({
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${exo.className} ${exo.variable} h-full antialiased`}
     >
       <body className="">
+        <Providers>
         <MyProvider>
          <TopNav/>
          <Navbar/>
@@ -35,6 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Toaster />
          <Footer/>
         </MyProvider>
+        </Providers>
       
         </body>
     </html>

@@ -124,18 +124,11 @@ export default function Navbar() {
             />
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger className="text-sm font-medium">
-              Categories
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2">
-                {categories.map((category) => (
-                  <ListItem key={category.title} title={category.title} href={category.href}>
-                    {category.description}
-                  </ListItem>
-                ))}
-              </ul>
-            </NavigationMenuContent>
+           
+                <Link href="/categories" className="text-sm font-medium hover:text-green-600">
+                 Categories
+                </Link>
+              
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink

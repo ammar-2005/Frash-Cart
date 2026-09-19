@@ -1,7 +1,11 @@
 import React from 'react'
+import cartComp from './../-commponent/cartComp/cartComp';
 
-export default function page() {
+export default function Cart() {
   return (
-    <div>page</div>
+  <>
+   <cartComp/>
+
+  </>
   )
 }

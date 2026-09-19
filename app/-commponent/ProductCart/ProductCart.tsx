@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { HeartIcon, ArrowPathIcon, EyeIcon } from '@heroicons/react/24/outline'
 import { PlusIcon, StarIcon } from '@heroicons/react/24/solid'
 import { ProductType } from '@/app/api/types/ProductType'
+import AddBtn from '../AddBtn/AddBtn'
 
 export default function ProductCart({ product }: { product: ProductType }) {
   const rating = product.ratingsAverage ?? 0
@@ -89,15 +90,14 @@ export default function ProductCart({ product }: { product: ProductType }) {
                 <p className="text-xl font-extrabold text-slate-900">{product.price} EGP</p>
               )}
             </div>
+            {/* add to cart */}
+            <AddBtn
+            prodId={product._id}
+           cls="flex size-10 items-center justify-center rounded-full bg-emerald-600 text-white shadow-md transition hover:bg-emerald-700"
+           child={<PlusIcon className="size-5" />}
+              />
+            
 
-            <button
-              type="button"
-              aria-label="Add to cart"
-              onClick={(e) => e.preventDefault()}
-              className="flex size-10 items-center justify-center rounded-full bg-emerald-600 text-white shadow-md transition hover:bg-emerald-700"
-            >
-              <PlusIcon className="size-5" />
-            </button>
           </div>
         </div>
 
