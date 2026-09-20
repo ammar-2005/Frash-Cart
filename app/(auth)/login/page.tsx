@@ -24,10 +24,10 @@ import { Input } from '@/components/ui/input'
 import { Schema } from '../../Schema/loginSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from '@/components/ui/toast'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { LoginFormValues } from '@/app/Schema/loginSchema'
 import { signIn } from 'next-auth/react'
-import { callbackify } from 'util'
+
 
 const trustBadges = [
   { icon: SslIcon, label: 'SSL Secured' },
@@ -55,20 +55,22 @@ export default function Login() {
   })
 
   async function submitForm(data: LoginFormValues) {
-    const isLogin = await  signIn('credentials' , {...data} 
-    ) 
-    if (isLogin?.ok) { 
+    const result = await signIn('credentials', {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+    })
+
+    if (result?.ok) {
       toast.add({
         type: "success",
-        description: "Event has been created.",
+        description: "Logged in successfully",
       })
-
       router.push('/')
-    }
-    if (!isLogin) {
+    } else {
       toast.add({
         type: "error",
-        description: "Failed to create account.",
+        description: result?.error || "Invalid email or password",
       })
     }
   }

@@ -1,10 +1,11 @@
 import React from 'react'
-import cartComp from './../-commponent/cartComp/cartComp';
+import CartComp from '../-commponent/CartComp/CartComp'
+
 
 export default function Cart() {
   return (
   <>
-   <cartComp/>
+  <CartComp />
 
   </>
   )

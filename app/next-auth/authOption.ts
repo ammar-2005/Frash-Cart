@@ -46,24 +46,22 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   // after success login
-  callbacks:{
-    jwt({token , user}){
-      if(user){
-        token.id=user.id
-      token.token=user.token
-      }
-      return token
-    },
-    session({session , token}){
-      if(token){
-        session.user.id=token.id
-
-      }
-
-    return session
+callbacks: {
+  jwt({ token, user }) {
+    if (user) {
+      token.id = user.id
+      token.token = user.token
     }
-
+    return token
   },
+  session({ session, token }) {
+    if (token) {
+      session.user.id = token.id as string
+      session.user.token = token.token as string   
+    }
+    return session
+  }
+},
   pages:{
     signIn:'/login'
   }

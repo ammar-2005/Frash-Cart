@@ -15,6 +15,7 @@ declare module "next-auth" {
       email:string,
       id:string,
       address: string
+      token: string 
     }
   }
 }

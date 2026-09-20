@@ -24,6 +24,8 @@ import {
 
 import logo from '../../images/freshcart-logo.svg'
 import { useSession, signOut } from "next-auth/react"
+import { CartResponseType } from "@/app/api/types/CartType"
+import { useQuery } from "@tanstack/react-query"
 
 const categories: { title: string; href: string; description: string }[] = [
   {
@@ -70,9 +72,17 @@ export default function Navbar() {
 
   const { status } = useSession()
   const isAuthenticated = status === 'authenticated'
+   const { data:cartData , isLoading } = useQuery<CartResponseType>({
+        queryKey:['getCart'],
+        queryFn: async () => {
+            const res = await fetch('/api/cart')
+            if(!res.ok) throw new Error(' Error to call api')
+                return res.json()
+        }
+    })
 
   return (
-    <NavigationMenu className="max-w-full w-full bg-gray-100 border-b border-gray-300 sticky top-0 z-50">
+    <NavigationMenu className="max-w-full w-full bg-white border-b border-gray-300 sticky top-0 z-50">
       <NavigationMenuList className="w-full flex items-center gap-4 px-4 py-3">
         {/* logo */}
         <Link href="/" className="flex items-center shrink-0">
@@ -157,9 +167,15 @@ export default function Navbar() {
                 <HeartIcon className="size-6" />
               </Link>
 
-              <Link href="/cart" className="text-gray-700 hover:text-green-600">
-                <ShoppingCartIcon className="size-6" />
-              </Link>
+             <Link href="/cart" className="relative inline-flex items-center text-gray-700 hover:text-green-600">
+  <ShoppingCartIcon className="size-6" />
+  
+  {cartData?.numOfCartItems > 0 && (
+    <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-green-600 text-[10px] font-bold text-white">
+      {cartData?.numOfCartItems}
+    </span>
+  )}
+</Link>
 
               <Link
                 href="/profile"
