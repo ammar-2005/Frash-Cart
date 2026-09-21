@@ -191,9 +191,12 @@ export default function CartComp() {
         <span className="text-[#4c4c4c] text-sm font-normal leading-5.25">Subtotal:</span>
         <span className="text-[#191919] text-sm font-medium leading-5.25">{cartData?.numOfCartItems}</span>
       </div>
-      <button className="w-94 text-white mt-5 px-10 py-4 bg-[#00b206] rounded-[44px] gap-4 text-base font-semibold leading-tight">
+      <Link
+        href="/addresses"
+        className="block w-94 text-white mt-5 px-10 py-4 bg-[#00b206] rounded-[44px] gap-4 text-base font-semibold leading-tight"
+      >
         Proceed to checkout
-      </button>
+      </Link>
     </div>
   </div>
 
