@@ -5,6 +5,7 @@ import { HeartIcon, ArrowPathIcon, EyeIcon } from '@heroicons/react/24/outline'
 import { PlusIcon, StarIcon } from '@heroicons/react/24/solid'
 import { ProductType } from '@/app/api/types/ProductType'
 import AddBtn from '../AddBtn/AddBtn'
+import WishlistBtn from './../WishlistBtn/WishlistBtn';
 
 export default function ProductCart({ product }: { product: ProductType }) {
   const rating = product.ratingsAverage ?? 0
@@ -14,13 +15,7 @@ export default function ProductCart({ product }: { product: ProductType }) {
     <div className="group relative w-full max-w-xs overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl  mx-5 ">
       {/* floating action icons */}
       <div className="absolute right-4 top-4 z-10 flex flex-col gap-2">
-        <button
-          type="button"
-          aria-label="Add to wishlist"
-          className="flex size-9 items-center justify-center rounded-full bg-white shadow-md transition hover:bg-emerald-600 hover:text-white"
-        >
-          <HeartIcon className="size-4" />
-        </button>
+        <WishlistBtn prodId={product._id} />
         <button
           type="button"
           aria-label="Compare"

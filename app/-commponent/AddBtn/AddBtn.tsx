@@ -1,42 +1,36 @@
 'use client'
 import { addToCart } from '@/app/api/action/CartActiona/AddToCart'
 import { toast } from '@/components/ui/toast'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import React, { ReactNode } from 'react'
 
-export default  function AddBtn({cls , child ,prodId} : {cls:string , child:ReactNode , prodId:string}) {
-    // call API
+export default function AddBtn({ cls, child, prodId }: { cls: string; child: ReactNode; prodId: string }) {
+  const query = useQueryClient()
 
-      async function handleAddToCart(){
-         mutate(prodId)
-       }
-       const { data , mutate} = useMutation({
-        mutationFn:addToCart,
-        onSuccess:() =>{
-           toast.add({
-            type:'success',
-            description:' the Product added to cart'
-          })
+  async function handleAddToCart() {
+    mutate(prodId)
+  }
 
-        },
-        onError:() =>{
-            toast.add({
-            type:'error',
-            description:' Login first  '
-          })
-
-        },
-
-
-       })
+  const { data, mutate } = useMutation({
+    mutationFn: addToCart,
+    onSuccess: () => {
+      toast.add({
+        type: 'success',
+        description: 'The product added to cart',
+      })
+      query.invalidateQueries({ queryKey: ['getCart'] })   
+    },
+    onError: () => {
+      toast.add({
+        type: 'error',
+        description: 'Login first',
+      })
+    },
+  })
 
   return (
-    <>
     <button onClick={handleAddToCart} className={cls}>
-        {child}
+      {child}
     </button>
-    
-    
-    </>
   )
 }
