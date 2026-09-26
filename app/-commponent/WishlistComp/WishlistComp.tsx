@@ -66,7 +66,7 @@ export default function WishlistComp() {
       {/* products */}
       {!wishlistData?.count ? (
         <p className="py-16 text-center text-gray-500">Your wishlist is empty.</p>
-      ) : (
+      ) : ( 
         <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {wishlistData.data.map((product) => (
             <div

@@ -1,12 +1,15 @@
 import React from 'react'
 import WishlistComp from '../-commponent/WishlistComp/WishlistComp'
+import { HeartIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 
 export default function Wishlist() {
   return (
-  <>
-  <WishlistComp/>
-  
-  
-  </>
+    <div className="mx-auto max-w-10xl ">
+
+
+      <div className="mt-6">
+        <WishlistComp />
+      </div>
+    </div>
   )
 }

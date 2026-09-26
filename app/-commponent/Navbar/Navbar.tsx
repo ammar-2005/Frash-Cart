@@ -70,6 +70,7 @@ const navLinks = [
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false)
   const [accountOpen, setAccountOpen] = React.useState(false)
+  const [profileMenuOpen, setProfileMenuOpen] = React.useState(false)
 
   const { status } = useSession()
   const isAuthenticated = status === 'authenticated'
@@ -196,13 +197,42 @@ const { data: wishlistData } = useQuery<WishlistResponseType>({
   )}
 </Link>
 
-              <Link
-                href="/profile"
-                aria-label="My Account"
-                className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full flex items-center justify-center transition-colors"
-              >
-                <UserIcon className="size-5" />
-              </Link>
+              <div className="relative">
+  <button
+    type="button"
+    onClick={() => setProfileMenuOpen((prev) => !prev)}
+    aria-label="My Account"
+    className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full flex items-center justify-center transition-colors"
+  >
+    <UserIcon className="size-5" />
+  </button>
+
+  {profileMenuOpen && (
+    <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg py-2 flex flex-col z-50">
+      <Link
+        href="/profile"
+        className="px-4 py-2 text-sm hover:bg-gray-100 hover:text-green-600"
+        onClick={() => setProfileMenuOpen(false)}
+      >
+        My Account
+      </Link>
+      <Link
+        href="/orders"
+        className="px-4 py-2 text-sm hover:bg-gray-100 hover:text-green-600"
+        onClick={() => setProfileMenuOpen(false)}
+      >
+        My Orders
+      </Link>
+      <Link
+        href="/addresses"
+        className="px-4 py-2 text-sm hover:bg-gray-100 hover:text-green-600"
+        onClick={() => setProfileMenuOpen(false)}
+      >
+        My Addresses
+      </Link>
+    </div>
+  )}
+</div>
 
               <button
                 type="button"
