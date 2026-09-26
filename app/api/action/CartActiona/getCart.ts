@@ -21,7 +21,7 @@ export async function getCart() {
     if (!res.ok) {
       throw new Error("Unauthorized")
     }
- const payload = await res.json
+ const payload = await res.json()
     return payload
   } catch (error) {
     throw new Error("Unauthorized")

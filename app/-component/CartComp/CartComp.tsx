@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { getCart } from '@/app/api/action/CartActiona/getCart';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { CartResponseType, product2 } from '../../api/types/CartType';
 import Link from 'next/link'
 import { Square3Stack3DIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
