@@ -1,10 +1,10 @@
 import React from 'react'
-import { getSingleProduct } from '../../api/Service/ProductApi'
+import { getSingleProduct } from '../../api/service/ProductApi'
 import Image from 'next/image'
 import { PlusIcon, StarIcon } from '@heroicons/react/24/solid'
-import QuantitySelector from '@/app/-commponent/Quantityselector/Quantityselector'
+import QuantitySelector from '@/app/-component/Quantityselector/Quantityselector'
 import Link from 'next/link'
-import AddBtn from '@/app/-commponent/AddBtn/AddBtn'
+import AddBtn from '@/app/-component/AddBtn/AddBtn'
 type ProductDetailsProps = {
   params: Promise<{ id: string }>
 }

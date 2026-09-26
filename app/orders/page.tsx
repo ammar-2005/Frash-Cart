@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import OrdersComp from '../-commponent/OrdersComp/OrdersComp';
+import OrdersComp from '../-component/OrdersComp/OrdersComp';
 import { getUserOrders } from '../api/action/OrderAction/getUserOrders';
 import { Order } from '../api/types/OrderType';
 

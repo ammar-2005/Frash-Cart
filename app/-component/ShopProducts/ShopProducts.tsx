@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-import ProductCart from '@/app/-commponent/ProductCart/ProductCart'
+import ProductCart from '@/app/-component/ProductCart/ProductCart'
 import { ProductType } from '@/app/api/types/ProductType'
 
 export default function ShopProducts({ products }: { products: ProductType[] }) {

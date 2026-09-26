@@ -1,5 +1,5 @@
 import React from 'react'
-import CartComp from '../-commponent/CartComp/CartComp'
+import CartComp from '../-component/CartComp/CartComp'
 import { ShoppingBagIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 
 export default function Cart() {

@@ -5,7 +5,7 @@ import { HeartIcon, ArrowPathIcon, EyeIcon } from '@heroicons/react/24/outline'
 import { PlusIcon, StarIcon } from '@heroicons/react/24/solid'
 import { ProductType } from '@/app/api/types/ProductType'
 import AddBtn from '../AddBtn/AddBtn'
-import WishlistBtn from './../WishlistBtn/WishlistBtn';
+import WishlistBtn from '../WishlistBtn/WishlistBtn';
 
 export default function ProductCart({ product }: { product: ProductType }) {
   const rating = product.ratingsAverage ?? 0

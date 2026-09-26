@@ -1,9 +1,9 @@
-import FeaturedProduct from "./-commponent/FeaturedProduct/FeaturedProduct";
-import ShopCategory from "./-commponent/ShopCategory/ShopCategory";
-import HeroSlider from "./-commponent/Slider/HomeSlider";
-import Subscription from "./-commponent/Subscription/Subscription";
-import PromoBanners from "./-commponent/item-cart/PromoBanners";
-import ItemCart from "./-commponent/item-cart/item-cart";
+import FeaturedProduct from "./-component/FeaturedProduct/FeaturedProduct";
+import ShopCategory from "./-component/ShopCategory/ShopCategory";
+import HeroSlider from "./-component/Slider/HomeSlider";
+import Subscription from "./-component/Subscription/Subscription";
+import PromoBanners from "./-component/item-cart/PromoBanners";
+import ItemCart from "./-component/item-cart/item-cart";
 import { Toaster } from "@/components/ui/toast"
 export default function Home() {
   return (

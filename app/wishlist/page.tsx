@@ -1,5 +1,5 @@
 import React from 'react'
-import WishlistComp from '../-commponent/WishlistComp/WishlistComp'
+import WishlistComp from '../-component/WishlistComp/WishlistComp'
 import { HeartIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 
 export default function Wishlist() {

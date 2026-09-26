@@ -1,6 +1,6 @@
 import React from 'react'
-import ShopProducts from './../-commponent/ShopProducts/ShopProducts';
-import { getAllProduct } from '@/app/api/Service/ProductApi';
+import ShopProducts from '../-component/ShopProducts/ShopProducts';
+import { getAllProduct } from '@/app/api/service/ProductApi';
 import { Square3Stack3DIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 

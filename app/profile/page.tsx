@@ -1,6 +1,6 @@
 import React from 'react'
 import { ChevronRightIcon, UserCircleIcon, MapPinIcon, ShoppingBagIcon } from '@heroicons/react/24/outline'
-import ProfileComp from '../-commponent/ProfileComp/ProfileComp'
+import ProfileComp from '../-component/ProfileComp/ProfileComp'
 
 export default function ProfilePage() {
   const accountCards = [

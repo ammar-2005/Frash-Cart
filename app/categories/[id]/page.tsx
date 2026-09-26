@@ -1,4 +1,4 @@
-import { getSingleCategory } from '@/app/api/Service/Categories'
+import { getSingleCategory } from '@/app/api/service/Categories'
 import Link from 'next/link';
 import Image from 'next/image';
 import { AArrowDown } from 'lucide-react'

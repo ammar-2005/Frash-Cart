@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Exo } from "next/font/google";
 import "./globals.css";
-import Navbar from "./-commponent/Navbar/Navbar";
-import Footer from "./-commponent/Footer/Footer";
-import TopNav from "./-commponent/TopNav/TopNav";
+import Navbar from "./-component/Navbar/Navbar";
+import Footer from "./-component/Footer/Footer";
+import TopNav from "./-component/TopNav/TopNav";
 import { Toaster } from '@/components/ui/toast';
-import MyProvider from './-commponent/MyProvider/MyProvider';
-import Providers from "./-commponent/TanstackProvider/TanstackProvider";
+import MyProvider from './-component/MyProvider/MyProvider';
+import Providers from "./-component/TanstackProvider/TanstackProvider";
 
 
 const exo = Exo({

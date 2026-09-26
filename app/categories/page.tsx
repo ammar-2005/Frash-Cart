@@ -1,8 +1,9 @@
 import React from 'react'
-import { getShopCategory } from '@/app/api/Service/Categories'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { Square3Stack3DIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
+import { getShopCategory } from '@/app/api/service/Categories';
 
 export default async function Categories() {
   const data = await getShopCategory()

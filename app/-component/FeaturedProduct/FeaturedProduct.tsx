@@ -1,4 +1,4 @@
-import { getAllProduct } from '@/app/api/Service/ProductApi'
+import { getAllProduct } from '@/app/api/service/ProductApi'
 import ProductCart from '../ProductCart/ProductCart'
 import { ProductType } from '@/app/api/types/ProductType'
 

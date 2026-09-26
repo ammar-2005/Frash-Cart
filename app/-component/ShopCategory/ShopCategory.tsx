@@ -1,4 +1,4 @@
-import { getShopCategory } from '@/app/api/Service/Categories'
+import { getShopCategory } from '@/app/api/service/Categories'
 import Link from "next/link"
 import Image from 'next/image'
 import React from 'react'
