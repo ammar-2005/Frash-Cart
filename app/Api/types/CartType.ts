@@ -1,3 +1,5 @@
+
+import { Category, Subcategory, Brand } from './CategoryType'; 
 export interface CartResponseType{
  status: string
  message: string

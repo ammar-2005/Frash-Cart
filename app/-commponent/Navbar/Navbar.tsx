@@ -180,7 +180,7 @@ const { data: wishlistData } = useQuery<WishlistResponseType>({
 
   {wishlistData?.count > 0 && (
     <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-pink-500 text-[10px] font-bold text-white">
-      {wishlistData?.count}
+      {wishlistData?.count ?? 0}
     </span>
   )}
 </Link>
@@ -192,7 +192,7 @@ const { data: wishlistData } = useQuery<WishlistResponseType>({
   
   {cartData?.numOfCartItems > 0 && (
     <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-green-600 text-[10px] font-bold text-white">
-      {cartData?.numOfCartItems}
+      {cartData?.numOfCartItems ?? 0}
     </span>
   )}
 </Link>
