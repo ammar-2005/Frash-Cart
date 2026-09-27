@@ -1,10 +1,13 @@
-import { getToken } from "next-auth/jwt";
-import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth"
+import { NextResponse } from "next/server"
+import { authOptions } from "@/app/next-auth/authOption"
 
 export const dynamic = 'force-dynamic'
 
-export async function GET(req: NextRequest) {
-  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
+export async function GET() {
+  const session = await getServerSession(authOptions)
+  const token = session?.user?.token
+
   if (!token) {
     return NextResponse.json({ message: 'unauthorized' }, { status: 401 })
   }
@@ -13,7 +16,7 @@ export async function GET(req: NextRequest) {
     method: "GET",
     cache: 'no-store',
     headers: {
-      token: token.token as string,
+      token: token,
       "Content-Type": "application/json",
     },
   })
