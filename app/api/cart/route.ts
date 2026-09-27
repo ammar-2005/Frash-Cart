@@ -1,6 +1,6 @@
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
-
+export const dynamic = 'force-dynamic'
 export async function GET(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET })
 
@@ -13,6 +13,7 @@ export async function GET(req: NextRequest) {
 
   const res = await fetch("https://ecommerce.routemisr.com/api/v2/cart", {
     method: "GET",
+     cache: 'no-store',
     headers: {
       token: token.token as string,
       "Content-Type": "application/json",

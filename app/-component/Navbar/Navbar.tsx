@@ -27,7 +27,6 @@ import { useSession, signOut } from "next-auth/react"
 import { CartResponseType } from "@/app/api/types/CartType"
 import { useQuery } from "@tanstack/react-query"
 import { WishlistResponseType } from "@/app/api/types/WishlistType"
-import { getCart } from "@/app/api/action/CartActiona/getCart";
 
 const categories: { title: string; href: string; description: string }[] = [
   {
@@ -76,14 +75,14 @@ export default function Navbar() {
   const { status } = useSession()
   const isAuthenticated = status === 'authenticated'
   // add cart 
-   const { data:cartData , isLoading } = useQuery<CartResponseType>({
-        queryKey:['getCart'],
-        queryFn: async () => {
-            const res = await getCart()
-            if(!res.ok) throw new Error(' Error to call api')
-                return res.json()
-        }
-    })
+ const { data: cartData, isLoading } = useQuery<CartResponseType>({
+  queryKey: ['getCart'],
+  queryFn: async () => {
+    const res = await fetch('/api/cart')
+    if (!res.ok) throw new Error(' Error to call api')
+    return res.json()
+  }
+})
 //  add wishlist
 const { data: wishlistData } = useQuery<WishlistResponseType>({
   queryKey: ['getWishlist'],
