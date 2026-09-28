@@ -359,31 +359,7 @@ All data comes from the **Route Academy E-commerce REST API** — `https://ecomm
 
 ---
 
-## 📸 Screenshots
 
-> Add your own screenshots to a `screenshots/` folder (any PNG/JPG) using the file names below, or edit the paths.
-
-<div align="center">
-
-| Home | Shop |
-| :---: | :---: |
-| <img src="./screenshots/home.png" alt="Home" width="420" /> | <img src="./screenshots/shop.png" alt="Shop" width="420" /> |
-
-| Product Details | Cart |
-| :---: | :---: |
-| <img src="./screenshots/product-details.png" alt="Product details" width="420" /> | <img src="./screenshots/cart.png" alt="Cart" width="420" /> |
-
-| Checkout | Wishlist |
-| :---: | :---: |
-| <img src="./screenshots/checkout.png" alt="Checkout" width="420" /> | <img src="./screenshots/wishlist.png" alt="Wishlist" width="420" /> |
-
-| Login | Forgot Password |
-| :---: | :---: |
-| <img src="./screenshots/login.png" alt="Login" width="420" /> | <img src="./screenshots/forgot-password.png" alt="Forgot password" width="420" /> |
-
-</div>
-
----
 
 ## 🚀 Getting Started
 
@@ -471,26 +447,12 @@ export default nextConfig
 
 ---
 
-## 🔮 Roadmap
-
-- [x] Authentication (Register · Login · Forgot / Change password)
-- [x] Catalog (Products · Brands · Categories)
-- [x] Cart · Wishlist · Addresses
-- [x] Checkout with Cash & Online payment
-- [x] Orders & Profile
-- [ ] Social login (Google / Facebook)
-- [ ] Product compare & quick-view modal
-- [ ] Reviews & ratings submission
-- [ ] Coupon codes
-- [ ] Dark mode
-
----
 
 ## 👤 Author
 
 **Ammar Ramadan**
 
-[![GitHub](https://github.com/ammar-2005)
+[![GitHub] (https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ammar-2005)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/YOUR_PROFILE)
 
 <div align="center">
